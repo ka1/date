@@ -1,6 +1,6 @@
 {
   "name": "@ka1/date",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Various javascript functions around dates",
   "main": "ymdToDate.js",
   "scripts": {
