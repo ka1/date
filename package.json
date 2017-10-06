@@ -1,0 +1,14 @@
+{
+  "name": "date",
+  "version": "1.0.0",
+  "description": "Various javascript functions around dates",
+  "main": "ymdToDate.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "date"
+  ],
+  "author": "Kai Kasugai",
+  "license": "UNLICENSED"
+}
