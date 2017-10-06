@@ -1,5 +1,5 @@
-import {monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd} from "./ymdToDate.jsx";
-import TimeWindow from "./ymdToDate.jsx";
+import {monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd} from "./ymdToDate";
+import { TimeWindow } from "./ymdToDate";
 import { dateToYm, ymToDate } from "./ymdToDate";
 
 test("receive correct sample date", () => {

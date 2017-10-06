@@ -8,6 +8,7 @@ module.exports = {
         "react",
         "jest"
     ],
+    "parser": "babel-eslint",
     "env": {
         "jest": true
     }

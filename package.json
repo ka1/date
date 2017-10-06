@@ -2,15 +2,44 @@
   "name": "@ka1/date",
   "version": "1.0.2",
   "description": "Various javascript functions around dates",
-  "main": "ymdToDate.js",
+  "main": "./distribution/ymdToDate.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "babel source --out-dir distribution"
   },
   "keywords": [
     "date"
   ],
   "author": "Kai Kasugai",
   "license": "UNLICENSED",
-  "repository" :
-  { "type" : "git" , "url" : "https://github.com/ka1/date.git"}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ka1/date.git"
+  },
+  "devDependencies": {
+    "babel-jest": "^21.2.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-commonjs-es2015-modules": "^3.0.2",
+    "babel-plugin-transform-imports": "^1.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/distribution"
+    ]
+  }
 }

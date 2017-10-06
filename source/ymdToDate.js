@@ -3,21 +3,21 @@
  * @param dateStr
  * @returns {Date}
  */
-function ymdToDate(dateStr) {
+export function ymdToDate(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     const [year, month, day] = dateStr.split("-");
     return new Date(year, month - 1, day);
 }
 
-function dmyToDate(dateStr) {
+export function dmyToDate(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     const [day, month, year] = dateStr.split(".");
     return new Date(year, month - 1, day);
 }
 
-function dmyToYmd(dateStr) {
+export function dmyToYmd(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     let [day, month, year] = dateStr.split(".");
@@ -30,7 +30,7 @@ function dmyToYmd(dateStr) {
     ].join("-");
 }
 
-function ymToDate(dateStr, getLastDay){
+export function ymToDate(dateStr, getLastDay){
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     //by default, return the last day
@@ -47,7 +47,7 @@ function ymToDate(dateStr, getLastDay){
     }
 }
 
-function dateToYmd(dateObj) {
+export function dateToYmd(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -60,7 +60,7 @@ function dateToYmd(dateObj) {
     ].join("-");
 }
 
-function dateToYm(dateObj) {
+export function dateToYm(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -71,7 +71,7 @@ function dateToYm(dateObj) {
     ].join("-");
 }
 
-function dateToDmy(dateObj) {
+export function dateToDmy(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -89,7 +89,7 @@ function dateToDmy(dateObj) {
  * @param dateObj Date
  * @returns {*}
  */
-function getEnglishWeekday(dateObj) {
+export function getEnglishWeekday(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -110,7 +110,7 @@ function getEnglishWeekday(dateObj) {
  * @param dateObj Date
  * @returns {*}
  */
-function getGermanWeekday(dateObj) {
+export function getGermanWeekday(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -134,7 +134,7 @@ function getGermanWeekday(dateObj) {
  * @param endDateString YYYY-MM-DD
  * @returns {null, int}
  */
-function countMonthsInPeriod(startDateString, endDateString){
+export function countMonthsInPeriod(startDateString, endDateString){
     "use strict";
     if (startDateString === undefined || endDateString === undefined){
         return null;
@@ -145,7 +145,7 @@ function countMonthsInPeriod(startDateString, endDateString){
     return monthDiff(start, end, "GREEDY");
 }
 
-function monthDiff(d1, d2, mode="GREEDY") {
+export function monthDiff(d1, d2, mode="GREEDY") {
     let modificator;
     switch (mode) {
         //count first month as full and last month as full. same month to same month is one month
@@ -171,7 +171,7 @@ function monthDiff(d1, d2, mode="GREEDY") {
     return months <= 0 ? 0 : months;
 }
 
-class TimeWindow {
+export class TimeWindow {
     dateStart;
     dateEnd;
     pointer;
@@ -322,16 +322,3 @@ class TimeWindow {
         return this.touchRight;
     }
 }
-
-module.exports.ymdToDate = ymdToDate;
-module.exports.dmyToDate = dmyToDate;
-module.exports.dmyToYmd = dmyToYmd;
-module.exports.ymToDate = ymToDate;
-module.exports.dateToYmd = dateToYmd;
-module.exports.dateToYm = dateToYm;
-module.exports.dateToDmy = dateToDmy;
-module.exports.getEnglishWeekday = getEnglishWeekday;
-module.exports.getGermanWeekday = getGermanWeekday;
-module.exports.countMonthsInPeriod = countMonthsInPeriod;
-module.exports.monthDiff = monthDiff;
-module.exports.TimeWindow = TimeWindow;
