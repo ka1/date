@@ -1,6 +1,6 @@
 {
-  "name": "date",
-  "version": "1.0.0",
+  "name": "@ka1/date",
+  "version": "1.0.1",
   "description": "Various javascript functions around dates",
   "main": "ymdToDate.js",
   "scripts": {
@@ -10,5 +10,7 @@
     "date"
   ],
   "author": "Kai Kasugai",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "repository" :
+  { "type" : "git" , "url" : "https://github.com/ka1/date.git"}
 }
