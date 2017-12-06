@@ -1,6 +1,6 @@
 import {monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd} from "./ymdToDate";
 import { TimeWindow } from "./ymdToDate";
-import { dateToYm, ymToDate } from "./ymdToDate";
+import { dateToYm, ymToDate, ymGtYm, ymToInt } from "./ymdToDate";
 
 test("receive correct sample date", () => {
     expect(ymdToDate("2017-01-01")).toMatchObject(new Date(2017, 0, 1));
@@ -71,6 +71,100 @@ describe("test date diff modes", () => {
         expect(monthDiff(first, second, "GREEDY")).toEqual(2);
         expect(monthDiff(first, second)).toEqual(2);
     });
+});
+
+describe("date ym comparison test and performance", () => {
+    it("should state that the first one is not greater than the second", () => {
+        expect(ymGtYm("2017-01", "2017-02")).toEqual(false);
+    });
+
+    it("should state that the first one is not greater than the second, too", () => {
+        expect(ymToInt("2017-01") > ymToInt("2017-02")).toEqual(false);
+    });
+
+    it("should state that the first one is greater than the second in the same year", () => {
+        expect(ymGtYm("2017-03", "2017-02")).toEqual(true);
+    });
+
+    it("should state that the first one is greater than the second in the same year, too", () => {
+        expect(ymToInt("2017-03") > ymToInt("2017-02")).toEqual(true);
+    });
+
+    it("should state that the first one is greater than the second in different years", () => {
+        expect(ymGtYm("2021-02", "2017-02")).toEqual(true);
+    });
+
+    it("should state that the first one is greater than the second in different years, too", () => {
+        expect(ymToInt("2021-02") > ymToInt("2017-02")).toEqual(true);
+    });
+
+    it("should state that the first one is not greater than the second in different years", () => {
+        expect(ymGtYm("2020-02", "2021-02")).toEqual(false);
+    });
+
+    it("should state that the first one is not greater than the second in different years, too", () => {
+        expect(ymToInt("2020-02") > ymToInt("2021-02")).toEqual(false);
+    });
+
+    it("should state false if both dates are the same", () => {
+        expect(ymGtYm("2020-02", "2020-02")).toEqual(false);
+    });
+
+    it("should state false if both dates are the same, too", () => {
+        expect(ymToInt("2020-02") > ymToInt("2020-02")).toEqual(false);
+    });
+
+    it("should convert a date to a string", () => {
+        expect(ymToInt("2015-02")).toBe(201502);
+    });
+
+    /**
+     * returns milliseconds. usage:
+     * const start = clock();
+     * const duration = clock(start);
+     * duration will hold the time in ms;
+     * @param start
+     * @returns {*}
+     */
+    function clock(start) {
+        if ( !start ) return process.hrtime();
+        let end = process.hrtime(start);
+        return Math.round((end[0]*1000) + (end[1]/1000000));
+    }
+
+    it("should be fast (210ms)", () => {
+        const start = clock();
+        for(let i = 0; i < 100000; i++){
+            const test = ymGtYm("2015-01", "2015-03");
+        }
+        const duration = clock(start);
+
+        expect(duration).toBeLessThan(210);
+    });
+
+    it("should be fast, too (280ms)", () => {
+        const start = clock();
+        for(let i = 0; i < 100000; i++){
+            const test = ymToDate("2015-01", false) < ymToDate("2015-03", false);
+        }
+        const duration = clock(start);
+
+        expect(duration).toBeLessThan(280);
+    });
+
+    it("should be superfast (100ms)", () => {
+        const date1 = "2015-02";
+        const date2 = "2015-03";
+
+        const start = clock();
+        for(let i = 0; i < 100000; i++){
+            const test = ymToInt(date1) < ymToInt(date2);
+        }
+        const duration = clock(start);
+
+        expect(duration).toBeLessThan(100);
+    });
+
 });
 
 describe("time window class", () => {

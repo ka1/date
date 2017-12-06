@@ -324,3 +324,41 @@ export class TimeWindow {
         return this.touchRight;
     }
 }
+
+/**
+ * Compares two YM Date strings. Returns true if the first string is greater (ie. later) than the second string.
+ * @param dateStringYm1
+ * @param dateStringYm2
+ * @returns {boolean}
+ */
+export function ymGtYm(dateStringYm1, dateStringYm2){
+    "use strict";
+
+    const date1 = dateStringYm1.split("-");
+    const date2 = dateStringYm2.split("-");
+
+    const year1 = parseInt(date1[0]);
+    const year2 = parseInt(date2[0]);
+
+    // first is actually later
+    if (year1 > year2) {
+        return true;
+    }
+    // second is actually later
+    else if (year1 < year2) {
+        return false;
+    }
+    // both years are the same, we have to compare months
+    else {
+        const month1 = parseInt(date1[1]);
+        const month2 = parseInt(date2[1]);
+
+        return month1 > month2;
+    }
+}
+
+export function ymToInt(dateStringYm){
+    "use strict";
+
+    return parseInt(dateStringYm.slice(0,4) + dateStringYm.slice(5, 7));
+}
