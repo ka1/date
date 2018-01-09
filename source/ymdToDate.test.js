@@ -60,8 +60,12 @@ describe("offset functions", () => {
         expect(ymOffset("2017-12", 1)).toBe("2018-01");
     });
 
-    it("should offset a string by 1 month plus", () => {
+    it("should offset a string by 1 month plus in november 2017", () => {
         expect(ymOffset("2017-11", 1)).toBe("2017-12");
+    });
+
+    it("should offset a string by 1 month plus in march 2018", () => {
+        expect(ymOffset("2018-03", 1)).toBe("2018-04");
     });
 
     it("should offset a string by -1 month in januar", () => {
@@ -74,6 +78,20 @@ describe("offset functions", () => {
 
     it("should offset a string by -120 month around year 2000", () => {
         expect(ymOffset("2005-05", -120)).toBe("1995-05");
+    });
+
+    function pad(num, size) {
+        let s = num+"";
+        while (s.length < size) s = "0" + s;
+        return s;
+    }
+
+    it("should be correct in a number of years", () => {
+        for(let year = 1970; year < 2050; year++) {
+            for(let month = 0; month < 11; month++){
+                expect(ymOffset(year + "-" + pad(month, 2), 1)).toBe(year + "-" + pad(month + 1, 2));
+            }
+        }
     });
 });
 

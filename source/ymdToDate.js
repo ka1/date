@@ -96,6 +96,8 @@ export function ymOffset(dateStr, monthOffset) {
     "use strict";
 
     let theDate = ymToDate(dateStr);
+    //make sure we do not run into time zone problems by using around the mid of month
+    theDate.setDate(15);
     theDate.setMonth(theDate.getMonth() + parseInt(monthOffset));
 
     return dateToYm(theDate);
