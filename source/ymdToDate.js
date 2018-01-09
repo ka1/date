@@ -87,6 +87,21 @@ export function dateToDmy(dateObj) {
 }
 
 /**
+ * Offsets a given YYYY-MM date string by a given integer of months
+ * @param {string} dateStr
+ * @param {string | int} monthOffset
+ * @returns {string}
+ */
+export function ymOffset(dateStr, monthOffset) {
+    "use strict";
+
+    let theDate = ymToDate(dateStr);
+    theDate.setMonth(theDate.getMonth() + parseInt(monthOffset));
+
+    return dateToYm(theDate);
+}
+
+/**
  * Receive the english name of the weekday
  * @param dateObj Date
  * @returns {*}

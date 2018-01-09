@@ -1,4 +1,4 @@
-import {monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd} from "./ymdToDate";
+import { monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset } from "./ymdToDate";
 import { TimeWindow } from "./ymdToDate";
 import { dateToYm, ymToDate, ymGtYm, ymToInt } from "./ymdToDate";
 
@@ -53,6 +53,28 @@ test("should return a date object with the last day of a month", () => {
 
 test("should return a date object with the first day of a month", () => {
     expect(ymToDate("2017-01",false).toUTCString()).toBe(new Date(2017,0,1).toUTCString());
+});
+
+describe("offset functions", () => {
+    it("should offset a string by 1 month plus in december", () => {
+        expect(ymOffset("2017-12", 1)).toBe("2018-01");
+    });
+
+    it("should offset a string by 1 month plus", () => {
+        expect(ymOffset("2017-11", 1)).toBe("2017-12");
+    });
+
+    it("should offset a string by -1 month in januar", () => {
+        expect(ymOffset("2017-01", -1)).toBe("2016-12");
+    });
+
+    it("should offset a string by -12 month", () => {
+        expect(ymOffset("2017-01", -12)).toBe("2016-01");
+    });
+
+    it("should offset a string by -120 month around year 2000", () => {
+        expect(ymOffset("2005-05", -120)).toBe("1995-05");
+    });
 });
 
 describe("test date diff modes", () => {
@@ -132,24 +154,24 @@ describe("date ym comparison test and performance", () => {
         return Math.round((end[0]*1000) + (end[1]/1000000));
     }
 
-    it("should be fast (210ms)", () => {
+    it("should be fast (250ms)", () => {
         const start = clock();
         for(let i = 0; i < 100000; i++){
             const test = ymGtYm("2015-01", "2015-03");
         }
         const duration = clock(start);
 
-        expect(duration).toBeLessThan(210);
+        expect(duration).toBeLessThan(250);
     });
 
-    it("should be fast, too (280ms)", () => {
+    it("should be fast, too (300ms)", () => {
         const start = clock();
         for(let i = 0; i < 100000; i++){
             const test = ymToDate("2015-01", false) < ymToDate("2015-03", false);
         }
         const duration = clock(start);
 
-        expect(duration).toBeLessThan(280);
+        expect(duration).toBeLessThan(300);
     });
 
     it("should be superfast (100ms)", () => {
