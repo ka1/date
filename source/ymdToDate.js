@@ -1,5 +1,3 @@
-export {generateMonthListFromPeriod, generateMonthListBetweenTwoDates} from "./generateMonthListFromPeriod";
-
 /**
  * Convert a string to a date object. Expecting 2017-07-11.
  * @param dateStr
