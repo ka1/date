@@ -377,5 +377,6 @@ export function ymGtYm(dateStringYm1, dateStringYm2){
 export function ymToInt(dateStringYm){
     "use strict";
 
+    if (typeof dateStringYm !== "string") return null;
     return parseInt(dateStringYm.slice(0,4) + dateStringYm.slice(5, 7));
 }
