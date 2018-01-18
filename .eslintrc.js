@@ -9,6 +9,12 @@ module.exports = {
         "jest"
     ],
     "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true
+        }
+    },
     "env": {
         "jest": true
     }

@@ -8,7 +8,7 @@
  * @param appendDay Bool, should we append the day (first of month)
  * @returns {null, string[]}
  */
-export function generateMonthListFromPeriod(startDateString, endDateString, windowStartString, windowSize, appendDay) {
+function generateMonthListFromPeriod(startDateString, endDateString, windowStartString, windowSize, appendDay) {
     "use strict";
     if (startDateString === undefined || endDateString === undefined || startDateString === null || endDateString === null || windowStartString === undefined || windowStartString === null) {
         return null;
@@ -55,7 +55,7 @@ export function generateMonthListFromPeriod(startDateString, endDateString, wind
  * @param endDateString String, YYYY-MM-DD.
  * @returns {Array}
  */
-export function generateMonthListBetweenTwoDates(startDateString, endDateString){
+function generateMonthListBetweenTwoDates(startDateString, endDateString){
     "use strict";
     if (startDateString === undefined || endDateString === undefined || startDateString === null || endDateString === null) {
         return [];
@@ -85,3 +85,8 @@ export function generateMonthListBetweenTwoDates(startDateString, endDateString)
 
     return rawDates;
 }
+
+module.exports = {
+    generateMonthListBetweenTwoDates: generateMonthListBetweenTwoDates,
+    generateMonthListFromPeriod: generateMonthListFromPeriod
+};

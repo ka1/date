@@ -1,58 +1,108 @@
-import { monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset } from "./ymdToDate";
-import { TimeWindow } from "./ymdToDate";
-import { dateToYm, ymToDate, ymGtYm, ymToInt } from "./ymdToDate";
+import {
+    generateMonthListFromPeriod,
+    generateMonthListBetweenTwoDates,
+    monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset,
+    TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt,
+    dmyToDate, dmyToYmd, dateToDmy, getEnglishWeekday, getGermanWeekday
+} from "../source";
 
-test("receive correct sample date", () => {
-    expect(ymdToDate("2017-01-01")).toMatchObject(new Date(2017, 0, 1));
+describe("generateMonthListFromPeriod", () => {
+    it("should handle undefined and null in either field", () => {
+        expect(generateMonthListFromPeriod("2017-01-01", null)).toBe(null);
+        expect(generateMonthListFromPeriod(null, "2017-01-01")).toBe(null);
+        expect(generateMonthListFromPeriod("2017-01-01", undefined)).toBe(null);
+        expect(generateMonthListFromPeriod(undefined, "2017-01-01")).toBe(null);
+    });
 });
 
-test("test for undefined", () => {
-    expect(ymdToDate()).toBeNull();
+describe("generateMonthListBetweenTwoDates", () => {
+    it("should return elements between dates", () => {
+        expect(generateMonthListBetweenTwoDates("2017-01", "2017-03")).toEqual(["2017-01", "2017-02", "2017-03"]);
+    });
+
+    it("should handle wrong order", () => {
+        expect(generateMonthListBetweenTwoDates("2017-03", "2017-01")).toEqual(["2017-01"]);
+    });
+
+    it("should handle uncomplete parameters", () => {
+        expect(generateMonthListBetweenTwoDates("2017-03")).toEqual([]);
+    });
+
 });
 
-test("edge case end of year, should be the same after converting back and forth", () => {
-    let input = "2017-12-31";
-    let convertedDate = ymdToDate(input);
-    let output = dateToYmd(convertedDate);
-    expect(input).toEqual(output);
-});
+describe("ymdToDate tests", () => {
+    test("should return a german weekday", () => {
+        expect(getGermanWeekday(new Date(2017, 0, 1))).toEqual("Sonntag");
+    });
 
-test("edge case first day in year, should be the same after converting back and forth", () => {
-    let input = "2040-01-01";
-    let convertedDate = ymdToDate(input);
-    let output = dateToYmd(convertedDate);
-    expect(input).toEqual(output);
-});
+    test("should return an english weekday", () => {
+        expect(getEnglishWeekday(new Date(2017, 0, 1))).toEqual("Sunday");
+    });
 
-test("should export string of year and month of a date object", () => {
-    let output = dateToYm(new Date(1971,0,1));
-    expect(output).toEqual("1971-01");
-});
+    test("should convert a date to a Dmy", () => {
+        expect(dateToDmy(new Date(2017, 0, 1))).toEqual("01.01.2017");
+    });
 
-test("should return the months in a period", () => {
-    expect(countMonthsInPeriod("2017-01-31", "2017-03-01")).toBe(3);
-});
+    test("should convert between dmy and ymd", () => {
+        expect(dmyToYmd("01.01.2017")).toEqual("2017-01-01");
+    });
 
-test("should return 1 if both dates are in the same month", () => {
-    expect(countMonthsInPeriod("2017-01-04", "2017-01-06")).toBe(1);
-});
+    test("should convert a dmy to a date", () => {
+        expect(dmyToDate("01.01.2017")).toMatchObject(new Date(2017, 0, 1));
+    });
 
-test("should return 0 if second date is before first date", () => {
-    expect(countMonthsInPeriod("2017-01-04", "2015-01-06")).toBe(0);
-});
+    test("receive correct sample date", () => {
+        expect(ymdToDate("2017-01-01")).toMatchObject(new Date(2017, 0, 1));
+    });
 
-test("should return null if one is undefined", () => {
-    expect(countMonthsInPeriod("2017-01-31", undefined)).toBe(null);
-    expect(countMonthsInPeriod(undefined, "2017-01-31")).toBe(null);
-});
+    test("test for undefined", () => {
+        expect(ymdToDate()).toBeNull();
+    });
 
-test("should return a date object with the last day of a month", () => {
-    expect(ymToDate("2017-12").toUTCString()).toBe(new Date(2017,11,31).toUTCString());
-    expect(ymToDate("2017-12",true).toUTCString()).toBe(new Date(2017,11,31).toUTCString());
-});
+    test("edge case end of year, should be the same after converting back and forth", () => {
+        let input = "2017-12-31";
+        let convertedDate = ymdToDate(input);
+        let output = dateToYmd(convertedDate);
+        expect(input).toEqual(output);
+    });
 
-test("should return a date object with the first day of a month", () => {
-    expect(ymToDate("2017-01",false).toUTCString()).toBe(new Date(2017,0,1).toUTCString());
+    test("edge case first day in year, should be the same after converting back and forth", () => {
+        let input = "2040-01-01";
+        let convertedDate = ymdToDate(input);
+        let output = dateToYmd(convertedDate);
+        expect(input).toEqual(output);
+    });
+
+    test("should export string of year and month of a date object", () => {
+        let output = dateToYm(new Date(1971, 0, 1));
+        expect(output).toEqual("1971-01");
+    });
+
+    test("should return the months in a period", () => {
+        expect(countMonthsInPeriod("2017-01-31", "2017-03-01")).toBe(3);
+    });
+
+    test("should return 1 if both dates are in the same month", () => {
+        expect(countMonthsInPeriod("2017-01-04", "2017-01-06")).toBe(1);
+    });
+
+    test("should return 0 if second date is before first date", () => {
+        expect(countMonthsInPeriod("2017-01-04", "2015-01-06")).toBe(0);
+    });
+
+    test("should return null if one is undefined", () => {
+        expect(countMonthsInPeriod("2017-01-31", undefined)).toBe(null);
+        expect(countMonthsInPeriod(undefined, "2017-01-31")).toBe(null);
+    });
+
+    test("should return a date object with the last day of a month", () => {
+        expect(ymToDate("2017-12").toUTCString()).toBe(new Date(2017, 11, 31).toUTCString());
+        expect(ymToDate("2017-12", true).toUTCString()).toBe(new Date(2017, 11, 31).toUTCString());
+    });
+
+    test("should return a date object with the first day of a month", () => {
+        expect(ymToDate("2017-01", false).toUTCString()).toBe(new Date(2017, 0, 1).toUTCString());
+    });
 });
 
 describe("offset functions", () => {
@@ -175,6 +225,7 @@ describe("date ym comparison test and performance", () => {
     it("should be fast (250ms)", () => {
         const start = clock();
         for(let i = 0; i < 100000; i++){
+            // eslint-disable-next-line no-unused-vars
             const test = ymGtYm("2015-01", "2015-03");
         }
         const duration = clock(start);
@@ -185,6 +236,7 @@ describe("date ym comparison test and performance", () => {
     it("should be fast, too (300ms)", () => {
         const start = clock();
         for(let i = 0; i < 100000; i++){
+            // eslint-disable-next-line no-unused-vars
             const test = ymToDate("2015-01", false) < ymToDate("2015-03", false);
         }
         const duration = clock(start);
@@ -192,22 +244,34 @@ describe("date ym comparison test and performance", () => {
         expect(duration).toBeLessThan(300);
     });
 
-    it("should be superfast (100ms)", () => {
+    it("should be superfast (120ms)", () => {
         const date1 = "2015-02";
         const date2 = "2015-03";
 
         const start = clock();
         for(let i = 0; i < 100000; i++){
+            // eslint-disable-next-line no-unused-vars
             const test = ymToInt(date1) < ymToInt(date2);
         }
         const duration = clock(start);
 
-        expect(duration).toBeLessThan(100);
+        expect(duration).toBeLessThan(120);
     });
 
 });
 
 describe("time window class", () => {
+    test("should shift the pointer by one month", () => {
+        let tw = new TimeWindow("2051-01-01", "2051-05-01", 12);
+        tw.calculateWindow();
+        tw.shiftPointer(1);
+
+        const nowPlusOneMonth = new Date();
+        nowPlusOneMonth.setMonth(nowPlusOneMonth.getMonth() + 1);
+
+        expect(dateToYm(tw.pointer)).toEqual(dateToYm(nowPlusOneMonth));
+    });
+
     test("should move pointer to the start if window is in the future and indicate that we are touching left and right boundaries", () => {
         let tw = new TimeWindow("2051-01-01", "2051-02-01", 12);
         tw.calculateWindow();
@@ -292,10 +356,3 @@ describe("time window class", () => {
         expect(tw.getTouchRight()).toBe(true);
     });
 });
-
-// export function ymdToDate(dateStr) {
-//     "use strict";
-//     if (dateStr === undefined) { return null; }
-//     const [year, month, day] = dateStr.split("-");
-//     return new Date(year, month - 1, day);
-// }

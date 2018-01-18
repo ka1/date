@@ -1,8 +1,8 @@
 {
   "name": "@ka1/date",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Various javascript functions around dates",
-  "main": "./distribution/ymdToDate.js",
+  "main": "./distribution/index.js",
   "scripts": {
     "test": "jest",
     "build": "babel source --out-dir distribution"

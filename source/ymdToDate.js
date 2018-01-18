@@ -1,25 +1,23 @@
-export {generateMonthListFromPeriod, generateMonthListBetweenTwoDates} from "./generateMonthListFromPeriod";
-
 /**
  * Convert a string to a date object. Expecting 2017-07-11.
  * @param dateStr
  * @returns {Date}
  */
-export function ymdToDate(dateStr) {
+function ymdToDate(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     const [year, month, day] = dateStr.split("-");
     return new Date(year, month - 1, day);
 }
 
-export function dmyToDate(dateStr) {
+function dmyToDate(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     const [day, month, year] = dateStr.split(".");
     return new Date(year, month - 1, day);
 }
 
-export function dmyToYmd(dateStr) {
+function dmyToYmd(dateStr) {
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     let [day, month, year] = dateStr.split(".");
@@ -32,7 +30,7 @@ export function dmyToYmd(dateStr) {
     ].join("-");
 }
 
-export function ymToDate(dateStr, getLastDay){
+function ymToDate(dateStr, getLastDay){
     "use strict";
     if (dateStr === undefined || dateStr === null) { return null; }
     //by default, return the last day
@@ -49,7 +47,7 @@ export function ymToDate(dateStr, getLastDay){
     }
 }
 
-export function dateToYmd(dateObj) {
+function dateToYmd(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -62,7 +60,7 @@ export function dateToYmd(dateObj) {
     ].join("-");
 }
 
-export function dateToYm(dateObj) {
+function dateToYm(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -73,7 +71,7 @@ export function dateToYm(dateObj) {
     ].join("-");
 }
 
-export function dateToDmy(dateObj) {
+function dateToDmy(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -92,7 +90,7 @@ export function dateToDmy(dateObj) {
  * @param {string | int} monthOffset
  * @returns {string}
  */
-export function ymOffset(dateStr, monthOffset) {
+function ymOffset(dateStr, monthOffset) {
     "use strict";
 
     let theDate = ymToDate(dateStr);
@@ -108,7 +106,7 @@ export function ymOffset(dateStr, monthOffset) {
  * @param dateObj Date
  * @returns {*}
  */
-export function getEnglishWeekday(dateObj) {
+function getEnglishWeekday(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -129,7 +127,7 @@ export function getEnglishWeekday(dateObj) {
  * @param dateObj Date
  * @returns {*}
  */
-export function getGermanWeekday(dateObj) {
+function getGermanWeekday(dateObj) {
     "use strict";
     if (!(dateObj instanceof Date)) { return null; }
 
@@ -153,7 +151,7 @@ export function getGermanWeekday(dateObj) {
  * @param endDateString YYYY-MM-DD
  * @returns {null, int}
  */
-export function countMonthsInPeriod(startDateString, endDateString){
+function countMonthsInPeriod(startDateString, endDateString){
     "use strict";
     if (startDateString === undefined || endDateString === undefined){
         return null;
@@ -164,7 +162,7 @@ export function countMonthsInPeriod(startDateString, endDateString){
     return monthDiff(start, end, "GREEDY");
 }
 
-export function monthDiff(d1, d2, mode="GREEDY") {
+function monthDiff(d1, d2, mode="GREEDY") {
     let modificator;
     switch (mode) {
         //count first month as full and last month as full. same month to same month is one month
@@ -190,7 +188,7 @@ export function monthDiff(d1, d2, mode="GREEDY") {
     return months <= 0 ? 0 : months;
 }
 
-export class TimeWindow {
+class TimeWindow {
     dateStart;
     dateEnd;
     pointer;
@@ -348,7 +346,7 @@ export class TimeWindow {
  * @param dateStringYm2
  * @returns {boolean}
  */
-export function ymGtYm(dateStringYm1, dateStringYm2){
+function ymGtYm(dateStringYm1, dateStringYm2){
     "use strict";
 
     const date1 = dateStringYm1.split("-");
@@ -374,9 +372,27 @@ export function ymGtYm(dateStringYm1, dateStringYm2){
     }
 }
 
-export function ymToInt(dateStringYm){
+function ymToInt(dateStringYm){
     "use strict";
 
     if (typeof dateStringYm !== "string") return null;
     return parseInt(dateStringYm.slice(0,4) + dateStringYm.slice(5, 7));
 }
+
+module.exports = {
+    ymdToDate: ymdToDate,
+    dmyToDate: dmyToDate,
+    dmyToYmd: dmyToYmd,
+    ymToDate: ymToDate,
+    dateToYmd: dateToYmd,
+    dateToYm: dateToYm,
+    dateToDmy: dateToDmy,
+    ymOffset: ymOffset,
+    getEnglishWeekday: getEnglishWeekday,
+    getGermanWeekday: getGermanWeekday,
+    countMonthsInPeriod: countMonthsInPeriod,
+    monthDiff: monthDiff,
+    TimeWindow: TimeWindow,
+    ymGtYm: ymGtYm,
+    ymToInt: ymToInt,
+};
