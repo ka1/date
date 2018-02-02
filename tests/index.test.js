@@ -2,7 +2,7 @@ import {
     generateMonthListFromPeriod,
     generateMonthListBetweenTwoDates,
     monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset,
-    TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt,
+    TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt, ymdToInt,
     dmyToDate, dmyToYmd, dateToDmy, getEnglishWeekday, getGermanWeekday
 } from "../source";
 
@@ -164,6 +164,14 @@ describe("test date diff modes", () => {
 });
 
 describe("date ym comparison test and performance", () => {
+    it("should return the correct integer for ym", () => {
+        expect(ymToInt("2017-01")).toEqual(201701);
+    });
+
+    it("should return the correct integer for ymd", () => {
+        expect(ymdToInt("2017-01-01")).toEqual(20170101);
+    });
+
     it("should state that the first one is not greater than the second", () => {
         expect(ymGtYm("2017-01", "2017-02")).toEqual(false);
     });

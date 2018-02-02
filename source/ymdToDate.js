@@ -379,7 +379,20 @@ function ymToInt(dateStringYm){
     return parseInt(dateStringYm.slice(0,4) + dateStringYm.slice(5, 7));
 }
 
+/**
+ * Takes 2017-01-15 and returns 20170115
+ * @param dateStringYmd
+ * @returns {*}
+ */
+function ymdToInt(dateStringYmd){
+    "use strict";
+
+    if (typeof dateStringYmd !== "string") return null;
+    return parseInt(dateStringYmd.slice(0,4) + dateStringYmd.slice(5, 7) + dateStringYmd.slice(8,10));
+}
+
 module.exports = {
+    ymdToInt: ymdToInt,
     ymdToDate: ymdToDate,
     dmyToDate: dmyToDate,
     dmyToYmd: dmyToYmd,

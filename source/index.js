@@ -18,6 +18,7 @@ module.exports = {
     TimeWindow: ymdToDate.TimeWindow,
     ymGtYm: ymdToDate.ymGtYm,
     ymToInt: ymdToDate.ymToInt,
+    ymdToInt: ymdToDate.ymdToInt,
 
     // from generateMonthListFromPeriod
     generateMonthListBetweenTwoDates: generateMonthListFromPeriod.generateMonthListBetweenTwoDates,
