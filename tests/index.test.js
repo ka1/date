@@ -230,7 +230,7 @@ describe("date ym comparison test and performance", () => {
         return Math.round((end[0]*1000) + (end[1]/1000000));
     }
 
-    it("should be fast (250ms)", () => {
+    it("should be fast (270ms)", () => {
         const start = clock();
         for(let i = 0; i < 100000; i++){
             // eslint-disable-next-line no-unused-vars
@@ -238,7 +238,7 @@ describe("date ym comparison test and performance", () => {
         }
         const duration = clock(start);
 
-        expect(duration).toBeLessThan(250);
+        expect(duration).toBeLessThan(270);
     });
 
     it("should be fast, too (300ms)", () => {
@@ -252,7 +252,7 @@ describe("date ym comparison test and performance", () => {
         expect(duration).toBeLessThan(300);
     });
 
-    it("should be superfast (120ms)", () => {
+    it("should be superfast (130ms)", () => {
         const date1 = "2015-02";
         const date2 = "2015-03";
 
@@ -263,7 +263,7 @@ describe("date ym comparison test and performance", () => {
         }
         const duration = clock(start);
 
-        expect(duration).toBeLessThan(120);
+        expect(duration).toBeLessThan(130);
     });
 
 });
