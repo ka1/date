@@ -379,6 +379,19 @@ function ymToInt(dateStringYm){
     return parseInt(dateStringYm.slice(0,4) + dateStringYm.slice(5, 7));
 }
 
+function intToYm(datelikeInt){
+    "use strict";
+
+    //convert to string if number and check type
+    let dateStringWithoutDash = datelikeInt;
+    if (typeof datelikeInt === "number") {
+        dateStringWithoutDash = datelikeInt.toString();
+    }
+    if (typeof dateStringWithoutDash !== "string") return null;
+
+    return dateStringWithoutDash.slice(0,4) + "-" + dateStringWithoutDash.slice(4,6);
+}
+
 /**
  * Takes 2017-01-15 and returns 20170115
  * @param dateStringYmd
@@ -408,4 +421,5 @@ module.exports = {
     TimeWindow: TimeWindow,
     ymGtYm: ymGtYm,
     ymToInt: ymToInt,
+    intToYm: intToYm,
 };

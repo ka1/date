@@ -2,7 +2,7 @@ import {
     generateMonthListFromPeriod,
     generateMonthListBetweenTwoDates,
     monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset,
-    TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt, ymdToInt,
+    TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt, ymdToInt, intToYm,
     dmyToDate, dmyToYmd, dateToDmy, getEnglishWeekday, getGermanWeekday
 } from "../source";
 
@@ -160,6 +160,24 @@ describe("test date diff modes", () => {
     test("should count two months in GREEDY (default) mode", () => {
         expect(monthDiff(first, second, "GREEDY")).toEqual(2);
         expect(monthDiff(first, second)).toEqual(2);
+    });
+});
+
+describe("intToYm tests", () => {
+    it("should convert a string to a date like string", () => {
+        expect(intToYm("201701")).toEqual("2017-01");
+    });
+
+    it("should convert an integer to a date like string", () => {
+        expect(intToYm(201701)).toEqual("2017-01");
+    });
+
+    it("should handle null", () => {
+        expect(intToYm(null)).toBeNull();
+    });
+
+    it("should handle an object as null", () => {
+        expect(intToYm({test: true})).toBeNull();
     });
 });
 

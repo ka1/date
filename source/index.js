@@ -18,6 +18,7 @@ module.exports = {
     TimeWindow: ymdToDate.TimeWindow,
     ymGtYm: ymdToDate.ymGtYm,
     ymToInt: ymdToDate.ymToInt,
+    intToYm: ymdToDate.intToYm,
     ymdToInt: ymdToDate.ymdToInt,
 
     // from generateMonthListFromPeriod
