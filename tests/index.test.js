@@ -106,6 +106,14 @@ describe("ymdToDate tests", () => {
 });
 
 describe("offset functions", () => {
+    it("should offset a string by 1 month plus in 2018-05", () => {
+        expect(ymOffset("2018-05", 1)).toBe("2018-06");
+    });
+
+    it("should offset a string by 1 month minus in 2018-05", () => {
+        expect(ymOffset("2018-05", -1)).toBe("2018-04");
+    });
+
     it("should offset a string by 1 month plus in december", () => {
         expect(ymOffset("2017-12", 1)).toBe("2018-01");
     });
