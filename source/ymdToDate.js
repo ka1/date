@@ -102,6 +102,23 @@ function ymOffset(dateStr, monthOffset) {
 }
 
 /**
+ * Offsets a given YYYY-MM-DD date string by a given integer of months,
+ * settings the day to 1 to correctly being able to shift end of month dates.
+ * @param {string} dateStr
+ * @param {string | int} monthOffset
+ * @returns {string}
+ */
+function ymdOffsetIgnoreDay(dateStr, monthOffset){
+    "use strict";
+
+    let theDate = ymdToDate(dateStr);
+    theDate.setDate(1);
+    theDate.setMonth(theDate.getMonth() + parseInt(monthOffset));
+
+    return dateToYmd(theDate);
+}
+
+/**
  * Receive the english name of the weekday
  * @param dateObj Date
  * @returns {*}
@@ -422,4 +439,5 @@ module.exports = {
     ymGtYm: ymGtYm,
     ymToInt: ymToInt,
     intToYm: intToYm,
+    ymdOffsetIgnoreDay: ymdOffsetIgnoreDay,
 };

@@ -20,6 +20,7 @@ module.exports = {
     ymToInt: ymdToDate.ymToInt,
     intToYm: ymdToDate.intToYm,
     ymdToInt: ymdToDate.ymdToInt,
+    ymdOffsetIgnoreDay: ymdToDate.ymdOffsetIgnoreDay,
 
     // from generateMonthListFromPeriod
     generateMonthListBetweenTwoDates: generateMonthListFromPeriod.generateMonthListBetweenTwoDates,
