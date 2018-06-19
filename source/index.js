@@ -19,6 +19,7 @@ module.exports = {
     ymGtYm: ymdToDate.ymGtYm,
     ymToInt: ymdToDate.ymToInt,
     intToYm: ymdToDate.intToYm,
+    intToYmd: ymdToDate.intToYmd,
     ymdToInt: ymdToDate.ymdToInt,
     ymdOffsetIgnoreDay: ymdToDate.ymdOffsetIgnoreDay,
 

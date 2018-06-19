@@ -3,7 +3,7 @@ import {
     generateMonthListBetweenTwoDates,
     monthDiff, countMonthsInPeriod, ymdToDate, dateToYmd, ymOffset,
     TimeWindow, dateToYm, ymToDate, ymGtYm, ymToInt, ymdToInt, intToYm,
-    dmyToDate, dmyToYmd, dateToDmy, getEnglishWeekday, getGermanWeekday
+    dmyToDate, dmyToYmd, dateToDmy, getEnglishWeekday, getGermanWeekday, intToYmd
 } from "../source";
 
 describe("generateMonthListFromPeriod", () => {
@@ -291,7 +291,28 @@ describe("date ym comparison test and performance", () => {
 
         expect(duration).toBeLessThan(130);
     });
+});
 
+describe("conversion functions", () => {
+    test("should convert 197001 to 1970-01", () => {
+        expect(intToYm(197001)).toEqual("1970-01");
+    });
+
+    test("should convert 19700101 to 1970-01-01", () => {
+        expect(intToYmd(19700101)).toEqual("1970-01-01");
+    });
+
+    test("should throw error with 1970-01 (too short)", () => {
+        expect(() => {intToYmd(197001);}).toThrowError("Minimum supported date is 1000-01-01");
+    });
+
+    test("should throw error with 99991232 (too large)", () => {
+        expect(() => {intToYmd(99991232);}).toThrowError("Maximum supported date is 9999-12-31");
+    });
+
+    test("should now throw error with '99991232' (too large, but string, so not tested)", () => {
+        expect(intToYmd("99991232")).toEqual("9999-12-32");
+    });
 });
 
 describe("time window class", () => {

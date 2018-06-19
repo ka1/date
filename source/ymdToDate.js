@@ -421,6 +421,32 @@ function ymdToInt(dateStringYmd){
     return parseInt(dateStringYmd.slice(0,4) + dateStringYmd.slice(5, 7) + dateStringYmd.slice(8,10));
 }
 
+function intToYmd(datelikeInt){
+    "use strict";
+
+    //convert to string if number and check type
+    let dateStringWithoutDash = datelikeInt;
+
+    if (typeof datelikeInt === "number") {
+        if (datelikeInt > 99991231) {
+            throw new Error("Maximum supported date is 9999-12-31");
+        } else if (datelikeInt < 10000101){
+            throw new Error("Minimum supported date is 1000-01-01");
+        }
+        dateStringWithoutDash = datelikeInt.toString();
+    }
+    else if (typeof datelikeInt === "string") {
+        if (datelikeInt.length !== 8){
+            throw new Error("Expecting a string or number with 10 characters")
+        }
+    }
+    else {
+        throw new Error("Expecting number or string");
+    }
+
+    return dateStringWithoutDash.slice(0,4) + "-" + dateStringWithoutDash.slice(4,6) + "-" + dateStringWithoutDash.slice(6,10);
+}
+
 module.exports = {
     ymdToInt: ymdToInt,
     ymdToDate: ymdToDate,
@@ -439,5 +465,6 @@ module.exports = {
     ymGtYm: ymGtYm,
     ymToInt: ymToInt,
     intToYm: intToYm,
+    intToYmd: intToYmd,
     ymdOffsetIgnoreDay: ymdOffsetIgnoreDay,
 };
