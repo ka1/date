@@ -1,6 +1,6 @@
 {
   "name": "@ka1/date",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Various javascript functions around dates",
   "main": "./distribution/index.js",
   "scripts": {
@@ -17,16 +17,16 @@
     "url": "https://github.com/ka1/date.git"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-bridge.0",
-    "@babel/core": "^7.0.0",
-    "babel-jest": "^23.4.2",
     "@babel/cli": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/plugin-syntax-class-properties": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-class-properties": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0",
-    "babel-plugin-transform-imports": "^1.4.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0"
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-transform-imports": "^1.5.1"
   },
   "jest": {
     "transform": {
