@@ -1,6 +1,6 @@
 {
   "name": "@ka1/date",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Various javascript functions around dates",
   "main": "./distribution/index.js",
   "scripts": {
